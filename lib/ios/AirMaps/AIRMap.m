@@ -115,6 +115,7 @@ const NSInteger AIRMapMaxZoomLevel = 20;
         ((AIRMapPolygon *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
     } else if ([subview isKindOfClass:[AIRMapCircle class]]) {
+        ((AIRMapCircle *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
     } else if ([subview isKindOfClass:[AIRMapUrlTile class]]) {
         ((AIRMapUrlTile *)subview).map = self;
@@ -319,7 +320,7 @@ RCT_EXPORT_METHOD(pointForCoordinate:(NSDictionary *)coordinate resolver: (RCTPr
                                                    [coordinate[@"lng"] doubleValue]
                                                    )
                                  toPointToView:self];
-  
+
   resolve(@{
             @"x": @(touchPoint.x),
             @"y": @(touchPoint.y),
@@ -335,7 +336,7 @@ RCT_EXPORT_METHOD(coordinateForPoint:(NSDictionary *)point resolver: (RCTPromise
                                                    [point[@"y"] doubleValue]
                                                    )
                                     toCoordinateFromView:self];
-  
+
   resolve(@{
             @"lat": @(coordinate.latitude),
             @"lng": @(coordinate.longitude),
